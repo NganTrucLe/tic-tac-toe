@@ -1,0 +1,157 @@
+:root {
+	font-family: Inter, system-ui, Avenir, Helvetica, Arial, sans-serif;
+	line-height: 1.5;
+	font-weight: 400;
+
+	color-scheme: light dark;
+	color: rgba(255, 255, 255, 0.87);
+	background-color: #242424;
+
+	font-synthesis: none;
+	text-rendering: optimizeLegibility;
+	-webkit-font-smoothing: antialiased;
+	-moz-osx-font-smoothing: grayscale;
+}
+
+a {
+	font-weight: 500;
+	color: #646cff;
+	text-decoration: inherit;
+}
+a:hover {
+	color: #535bf2;
+}
+
+body {
+	margin: 0;
+	display: flex;
+	place-items: center;
+	min-width: 320px;
+	min-height: 100vh;
+}
+
+h1 {
+	font-size: 3em;
+	line-height: 1.1;
+}
+
+button {
+	border: 1px solid transparent;
+	font-size: 1em;
+	font-weight: 500;
+	font-family: inherit;
+	background-color: rgb(245, 245, 245);
+	cursor: pointer;
+	transition: background-color 0.25s;
+}
+button:not(:disabled):hover {
+	background-color: rgb(229, 229, 229);
+}
+button:focus,
+button:focus-visible {
+	outline: 4px auto -webkit-focus-ring-color;
+}
+
+.square {
+	width: 3em;
+	height: 3em;
+	border: 1px solid #999;
+}
+
+@media (prefers-color-scheme: light) {
+	:root {
+		color: #213547;
+		background-color: #ffffff;
+	}
+	a:hover {
+		color: #747bff;
+	}
+}
+
+.game {
+	display: grid;
+	gap: 1em;
+	grid-template-columns: repeat(2, 1fr);
+	justify-items: center;
+}
+
+.board-row {
+	display: flex;
+	flex-direction: row;
+}
+
+.reset-btn {
+	border-radius: 8px;
+	padding: 0.5em 1em;
+	margin-top: 1em;
+	background-color: black;
+	color: white;
+}
+.reset-btn:not(:disabled):hover {
+	background-color: #333;
+	color: white;
+}
+button:disabled {
+	opacity: 0.5;
+	cursor: not-allowed;
+}
+button.won {
+	background-color: #fff07f;
+}
+button.won:hover {
+	background-color: #ffe000;
+}
+.status {
+	margin-bottom: 1rem;
+}
+.toggle-switch {
+	display: flex;
+	flex-direction: row;
+	justify-content: space-between;
+	align-items: center;
+	width: 100%;
+	gap: 8px;
+}
+
+.toggle-switch input[type="checkbox"] {
+	display: none;
+}
+
+.toggle-switch .toggle-label {
+	position: relative;
+	display: inline-block;
+	width: 40px;
+	height: 20px;
+	background-color: #ccc;
+	border-radius: 34px;
+	cursor: pointer;
+}
+
+.toggle-switch .toggle-label::after {
+	content: "";
+	position: absolute;
+	top: 2px;
+	left: 2px;
+	width: 16px;
+	height: 16px;
+	background-color: white;
+	border-radius: 50%;
+	transition: transform 0.3s;
+}
+
+.toggle-switch input[type="checkbox"]:checked + .toggle-label {
+	background-color: #1d38b1;
+}
+
+.toggle-switch input[type="checkbox"]:checked + .toggle-label::after {
+	transform: translateX(20px);
+}
+
+.move-list {
+	display: flex;
+	flex-direction: column-reverse;
+}
+
+.asc {
+	flex-direction: column !important;
+}
