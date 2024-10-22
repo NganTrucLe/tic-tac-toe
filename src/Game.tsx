@@ -103,7 +103,7 @@ export default function Game() {
 						<label htmlFor="toggle-switch" className="toggle-label"></label>
 					</div>
 					<ol className={`move-list ${sortAsc ? "asc" : ""}`}>
-						{history.map((squares, move) => {
+						{history.map((_, move) => {
 							let description;
 							if (move > 0) {
 								description = "Go to move #" + move;
