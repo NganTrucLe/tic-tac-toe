@@ -103,10 +103,18 @@ export default function Game() {
 						<label htmlFor="toggle-switch" className="toggle-label"></label>
 					</div>
 					<ol className={`move-list ${sortAsc ? "asc" : ""}`}>
-						{history.map((_, move) => {
+						{history.map((square, move) => {
 							let description;
+							console.log(move, square);
 							if (move > 0) {
-								description = "Go to move #" + move;
+								const index = history[move].findIndex(
+									(value, index) => value !== history[move - 1][index]
+								);
+								const moveAtRowCol = {
+									row: Math.floor(index / SIZE) + 1,
+									col: (index % SIZE) + 1,
+								};
+								description = `Go to move (${moveAtRowCol.row}, ${moveAtRowCol.col})`;
 							} else {
 								description = "Go to game start";
 							}
