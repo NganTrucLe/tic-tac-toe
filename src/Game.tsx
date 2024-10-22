@@ -58,36 +58,25 @@ function Board({ xIsNext, squares, onPlay, boardSize }: BoardProps) {
 const SIZE = 3;
 
 export default function Game() {
-	const [rcHistory, setRcHistory] = useState<
-		{
-			row: number;
-			col: number;
-			player: string;
-		}[]
-	>([]);
 	const [sortAsc, setSortAsc] = useState(true);
 	const [history, setHistory] = useState([Array(9).fill(null)]);
 	const [currentMove, setCurrentMove] = useState(0);
 	const xIsNext = currentMove % 2 === 0;
 	const currentSquares = history[currentMove];
 
-	function handlePlay(nextSquares: string[], { row, col }: { row: number; col: number }) {
+	function handlePlay(nextSquares: string[]) {
 		const nextHistory = [...history.slice(0, currentMove + 1), nextSquares];
-		setRcHistory([
-			...rcHistory,
-			{
-				row,
-				col,
-				player: xIsNext ? "X" : "O",
-			},
-		]);
 		setHistory(nextHistory);
 		setCurrentMove(nextHistory.length - 1);
 	}
 
 	function jumpTo(nextMove: number) {
 		setCurrentMove(nextMove);
-		setRcHistory(rcHistory.slice(0, nextMove));
+	}
+
+	function resetGame() {
+		setHistory([Array(9).fill(null)]);
+		setCurrentMove(0);
 	}
 
 	return (
@@ -97,7 +86,7 @@ export default function Game() {
 				<div>
 					<Board xIsNext={xIsNext} squares={currentSquares} onPlay={handlePlay} boardSize={SIZE} />
 
-					<button onClick={() => jumpTo(0)} className="reset-btn" disabled={currentMove == 0}>
+					<button onClick={resetGame} className="reset-btn" disabled={currentMove == 0}>
 						Reset game
 					</button>
 				</div>
@@ -114,9 +103,28 @@ export default function Game() {
 						<label htmlFor="toggle-switch" className="toggle-label"></label>
 					</div>
 					<ol className={`move-list ${sortAsc ? "asc" : ""}`}>
-						{rcHistory.map(({ row, col, player }, move) => (
-							<li key={move}>{`Player ${player} moved (${row}, ${col})`}</li>
-						))}
+						{history.map((squares, move) => {
+							let description;
+							if (move > 0) {
+								description = "Go to move #" + move;
+							} else {
+								description = "Go to game start";
+							}
+							if (move === currentMove) {
+								description = "You are at move #" + move;
+							}
+							return (
+								<li key={move}>
+									{move === currentMove ? (
+										<strong>{description}</strong>
+									) : (
+										<button onClick={() => jumpTo(move)} className="btn-history">
+											{description}
+										</button>
+									)}
+								</li>
+							);
+						})}
 					</ol>
 				</div>
 			</div>

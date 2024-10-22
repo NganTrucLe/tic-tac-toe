@@ -156,8 +156,20 @@ button.won:hover {
 .move-list {
 	display: flex;
 	flex-direction: column-reverse;
+	align-items: flex-start;
 }
 
 .asc {
 	flex-direction: column !important;
+}
+
+.btn-history {
+	padding: 0.25em 0.5em;
+	margin: 0.2em 0;
+	margin-left: 1rem;
+	border-radius: 8px;
+}
+
+ol > li :nth-child(n) {
+	margin-left: 0.5rem;
 }
